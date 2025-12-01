@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Device = require('../models/Device');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.createUser = async (userData) => {
@@ -31,6 +32,12 @@ exports.updateUser = async (id, updateData) => {
 };
 
 exports.deleteUser = async (id) => {
+    // Check if user has devices
+    const devices = await Device.find({ ownerId: id });
+    if (devices.length > 0) {
+        throw new ErrorResponse('No se puede eliminar el usuario porque tiene dispositivos asociados. Elimine o reasigne los dispositivos primero.', 400);
+    }
+
     const user = await User.findByIdAndDelete(id);
     if (!user) {
         throw new ErrorResponse(`Usuario no encontrado con id ${id}`, 404);

@@ -31,9 +31,15 @@ exports.updateDevice = async (id, updateData) => {
 };
 
 exports.deleteDevice = async (id) => {
-    const device = await Device.findByIdAndDelete(id);
+    const device = await Device.findById(id);
     if (!device) {
         throw new ErrorResponse(`Dispositivo no encontrado con id ${id}`, 404);
     }
+
+    if (device.sensors && device.sensors.length > 0) {
+        throw new ErrorResponse('No se puede eliminar el dispositivo porque tiene sensores asociados. Elimine los sensores primero.', 400);
+    }
+
+    await device.deleteOne();
     return device;
 };

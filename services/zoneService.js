@@ -1,4 +1,5 @@
 const Zone = require('../models/Zone');
+const Device = require('../models/Device');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.createZone = async (zoneData) => {
@@ -31,6 +32,12 @@ exports.updateZone = async (id, updateData) => {
 };
 
 exports.deleteZone = async (id) => {
+    // Check if zone has devices
+    const devices = await Device.find({ zoneId: id });
+    if (devices.length > 0) {
+        throw new ErrorResponse('No se puede eliminar la zona porque tiene dispositivos asociados. Elimine o reasigne los dispositivos primero.', 400);
+    }
+
     const zone = await Zone.findByIdAndDelete(id);
     if (!zone) {
         throw new ErrorResponse(`Zona no encontrada con id ${id}`, 404);
