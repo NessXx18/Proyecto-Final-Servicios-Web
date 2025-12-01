@@ -7,13 +7,11 @@ const connectDB = require('./config/db');
 const swaggerSpecs = require('./config/swagger');
 const errorHandler = require('./middlewares/error');
 
-// Load env vars
 dotenv.config();
 
-// Connect to database
+// Conexión a BD
 connectDB();
 
-// Route files
 const users = require('./routes/users');
 const zones = require('./routes/zones');
 const devices = require('./routes/devices');
@@ -28,12 +26,11 @@ app.use(express.json());
 // CORS
 app.use(cors());
 
-// Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
-// Mount routers
+// Uso de routers
 app.use('/api/users', users);
 app.use('/api/zones', zones);
 app.use('/api/devices', devices);
@@ -53,9 +50,7 @@ const server = app.listen(PORT, () => {
     console.log(`Documentación Swagger disponible en http://localhost:${PORT}/api-docs`);
 });
 
-// Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
     console.log(`Error: ${err.message}`);
-    // Close server & exit process
     server.close(() => process.exit(1));
 });

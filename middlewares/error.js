@@ -4,22 +4,22 @@ const errorHandler = (err, req, res, next) => {
     let error = { ...err };
     error.message = err.message;
 
-    // Log to console for dev
+    // Console.log para ver el error
     console.log(err);
 
-    // Mongoose bad ObjectId
+    // Error su no existe Not Found
     if (err.name === 'CastError') {
         const message = `Recurso no encontrado`;
         error = new ErrorResponse(message, 404);
     }
 
-    // Mongoose duplicate key
+    // Ya existe el valor
     if (err.code === 11000) {
         const message = 'Valor de campo duplicado ingresado';
         error = new ErrorResponse(message, 400);
     }
 
-    // Mongoose validation error
+    // Error de validación
     if (err.name === 'ValidationError') {
         const message = Object.values(err.errors).map(val => val.message);
         error = new ErrorResponse(message, 400);

@@ -69,7 +69,6 @@ const userSchema = new mongoose.Schema({
     toObject: { virtuals: true }
 });
 
-// Reverse populate with virtuals
 userSchema.virtual('devices', {
     ref: 'Device',
     localField: '_id',

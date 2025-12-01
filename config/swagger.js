@@ -4,11 +4,11 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'SmartCity Lab - Plataforma IoT API',
+            title: 'SmartCity Lab',
             version: '1.0.0',
-            description: 'API Backend para la Plataforma IoT SmartCity Lab',
+            description: 'API para Proyecto SmartCity Lab',
             contact: {
-                name: 'Soporte SmartCity Lab',
+                name: 'SmartCity Lab',
             },
         },
         servers: [
