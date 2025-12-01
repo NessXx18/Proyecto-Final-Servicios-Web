@@ -3,8 +3,8 @@ const swaggerJsdoc = require('swagger-jsdoc');
 
 const SERVER_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://proyecto-final-servicios-web.onrender.com/api'
-    : 'http://localhost:3000/api';
+    ? 'https://proyecto-final-servicios-web.onrender.com'
+    : 'http://localhost:3000';
 
 const options = {
   definition: {
