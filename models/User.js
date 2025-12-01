@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Por favor agregue una contraseña'],
         minlength: 6,
-        select: false // Don't return password by default
+        select: false
     },
     role: {
         type: String,

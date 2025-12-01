@@ -24,7 +24,12 @@ const app = express();
 app.use(express.json());
 
 // CORS
-app.use(cors());
+// CORS (Configuración completa para producción)
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
