@@ -1,6 +1,11 @@
 const path = require('path');
 const swaggerJsdoc = require('swagger-jsdoc');
 
+const SERVER_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://proyecto-final-servicios-web.onrender.com'
+    : 'http://localhost:3000';
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -8,17 +13,15 @@ const options = {
       title: 'SmartCity Lab - Plataforma IoT API',
       version: '1.0.0',
       description: 'API Backend para la Plataforma IoT SmartCity Lab',
-      contact: { name: 'Soporte SmartCity Lab' },
     },
     servers: [
       {
-        url: 'https://proyecto-final-servicios-web.onrender.com',
-        description: 'Servidor producción',
-      }
-      // {
-      //   url: 'http://localhost:3000',
-      //   description: 'Servidor de desarrollo',
-      // },
+        url: SERVER_URL,
+        description:
+          process.env.NODE_ENV === 'production'
+            ? 'Servidor de producción'
+            : 'Servidor local',
+      },
     ],
   },
   apis: [
@@ -27,6 +30,4 @@ const options = {
   ],
 };
 
-const specs = swaggerJsdoc(options);
-
-module.exports = specs;
+module.exports = swaggerJsdoc(options);
