@@ -26,7 +26,7 @@ app.use(express.json());
 // CORS
 // CORS (Configuración completa para producción)
 app.use(cors({
-    origin: "*",
+    origin: ["https://proyecto-final-servicios-web.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
