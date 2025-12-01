@@ -14,11 +14,11 @@ const options = {
       {
         url: 'https://proyecto-final-servicios-web.onrender.com',
         description: 'Servidor producción',
-      },
-      {
-        url: 'http://localhost:3000',
-        description: 'Servidor de desarrollo',
-      },
+      }
+      // {
+      //   url: 'http://localhost:3000',
+      //   description: 'Servidor de desarrollo',
+      // },
     ],
   },
   apis: [
