@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const cors = require('cors');
+const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const connectDB = require('./config/db');
 const swaggerSpecs = require('./config/swagger');
@@ -22,6 +23,9 @@ const app = express();
 
 // Body parser
 app.use(express.json());
+
+// Set security headers
+app.use(helmet());
 
 // CORS
 // CORS (Configuración completa para producción)
