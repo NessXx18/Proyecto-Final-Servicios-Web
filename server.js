@@ -56,7 +56,12 @@ const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, () => {
     console.log(`Servidor corriendo en modo ${process.env.NODE_ENV} en el puerto ${PORT}`);
-    console.log(`Documentación Swagger disponible en http://localhost:${PORT}/api-docs`);
+    const SERVER_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://proyecto-final-servicios-web.onrender.com'
+    : `http://localhost:${PORT}`;
+
+console.log(`Documentación Swagger disponible en ${SERVER_URL}/api-docs`);
 });
 
 process.on('unhandledRejection', (err, promise) => {
